@@ -33,7 +33,7 @@ check_installed curl
 check_installed envsubst
 
 MANIFEST_BRANCH=v0.11.0
-MANIFEST_URL=${MANIFEST_URL:-https://raw.githubusercontent.com/grafana/agent/${MANIFEST_BRANCH}/production/kubernetes/agent.yaml}
+MANIFEST_URL=${MANIFEST_URL:-https://raw.githubusercontent.com/aengusrooneygrafana/agent/${MANIFEST_BRANCH}/production/kubernetes/agent.yaml}
 NAMESPACE=${NAMESPACE:-default}
 
 REMOTE_WRITE_USERNAME_SET=0
