@@ -369,7 +369,11 @@ tempo:
     receivers:
       jaeger:
         protocols:
+          grpc:
+          thrift_binary:
+          thrift_compact:
           thrift_http:
+      zipkin: 
     attributes:
       actions:
       - action: upsert
