@@ -182,25 +182,6 @@ data:
         wal_directory: /var/lib/agent/data
     server:
         log_level: info
-    tempo:
-      push_config:
-        endpoint: tempo-us-central1.grafana.net:443
-        basic_auth:
-          username: 25
-          password: eyJrIjoiYWY3M2ZlZDZkY2VlZmU4NjkxMjFlYzFhNDM5Zjc3OWQ0OWI3MzgyYiIsIm4iOiJhZW5ndXNyb29uZXl0ZXN0LXRlbXBvLWFkbWluLWtleSIsImlkIjoyODM3MzR9
-      receivers:
-        jaeger:
-          protocols:
-            grpc:
-            thrift_binary:
-            thrift_compact:
-            thrift_http:
-        zipkin:
-        otlp:
-          protocols:
-            http:
-            grpc:
-        opencensus:
 kind: ConfigMap
 metadata:
   name: grafana-agent
@@ -382,3 +363,28 @@ spec:
           name: grafana-agent-deployment
         name: grafana-agent-deployment
 ---
+tempo:
+  configs:
+  - name: default
+    receivers:
+      jaeger:
+        protocols:
+          grpc:
+          thrift_binary:
+          thrift_compact:
+          thrift_http:
+      zipkin: 
+    attributes:
+      actions:
+      - action: upsert
+        key: env
+        value: prod
+    push_config:
+      endpoint: tempo-us-central1.grafana.net:443
+      basic_auth:
+        username: 25
+        password: eyJrIjoiYWY3M2ZlZDZkY2VlZmU4NjkxMjFlYzFhNDM5Zjc3OWQ0OWI3MzgyYiIsIm4iOiJhZW5ndXNyb29uZXl0ZXN0LXRlbXBvLWFkbWluLWtleSIsImlkIjoyODM3MzR9
+      insecure: true
+      batch:
+        timeout: 5s
+        send_batch_size: 100
